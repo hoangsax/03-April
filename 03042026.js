@@ -173,7 +173,7 @@ export class Library {
 
   getDate() {
     const now = new Date()
-    let date = now.getDate().toString().padStart(2, '0') + '-' + now.getMonth().toString().padStart(2, '0') + '-' + now.getFullYear().toString();
+    let date = now.getFullYear().toString() + '-' + now.getMonth().toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
     return date;
   }
 
