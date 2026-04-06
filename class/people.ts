@@ -8,6 +8,8 @@ type peopleChangableField =
     "gender" |
     "citizenID";
 
+type peopleFieldType = string | number;
+
 class People {
     name: string;
     DOB: string;
@@ -21,7 +23,7 @@ class People {
         this.citizenID = citizenID;
     }
 
-    changeInfoOnField(field: peopleChangableField, value: string | number) {
+    changeInfoOnField(field: peopleChangableField, value: peopleFieldType) {
         if (field === "name" || field === "DOB" || field === "gender") {
             this[field] = value as string;
         }
@@ -35,6 +37,8 @@ class Member extends People {
     static numberOfMember = 0;
     readonly ID: number;
     pendingBorrowLogID: number[] = [];
+    balance: number = 0;
+    trustPoint: number = 80;
     constructor(name: string, DOB: string, gender: string, citizenID: number) {
         super(name, DOB, gender, citizenID);
         this.ID = Member.numberOfMember++;
@@ -51,6 +55,24 @@ class Member extends People {
             return true;
         }
         return false;
+    }
+
+    topUpBalance(amount: number) {
+        this.balance += amount;
+        this.trustPoint = this.trustPoint + amount * .1
+    }
+
+    deductBalance(amount: number) : Boolean {
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            this.trustPoint = this.trustPoint + amount * .1
+            return true;
+        }
+        return false;
+    }
+
+    overduePenaty(amount: number) {
+        this.trustPoint -= (10 + amount * .1);
     }
 }
 

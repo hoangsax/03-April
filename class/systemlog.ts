@@ -1,6 +1,6 @@
 class SystemLog {
     static numberOfLog = 0;
-    readonly ID: number;
+    ID: number;
     EmployeeID: number;
     Time: string;
     Date: string;
@@ -12,6 +12,8 @@ class SystemLog {
         this.Time = Time;
         this.Date = Date;
         this.Note = Note;
+
+        Object.freeze(this);
     }
 
     getTime() {

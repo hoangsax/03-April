@@ -9,3 +9,4 @@ function TimeDiff(startTime: number, endTime: number): string {
 }
 
 console.log(TimeDiff(3600 * 5 + 60 * 30 + 45, 3600 * 17 + 60 * 30 + 45)); // Output: [12, 0, 0]
+console.log('08:30:45' < '17:30:45'); // Output: false

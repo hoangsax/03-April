@@ -6,7 +6,9 @@ type bookChangableField =
     "totalCopy" |
     "availableCopy" |
     "price";
-    
+
+type bookFieldType = number | string | string[];
+
 class Book {
     static numberOfBook = 0;
     readonly ID: number;
@@ -28,7 +30,7 @@ class Book {
         this.price = price;
     }
 
-    changeBookInfo(field: bookChangableField, value: string | number | string[]) {
+    changeBookInfo(field: bookChangableField, value: bookFieldType) {
         if (field === "name" || field === "releaseDate" || field === "author") {
             this[field] = value as string;
         }
@@ -41,4 +43,4 @@ class Book {
     }
 }
 
-export { Book, bookChangableField };
+export { Book, bookChangableField, bookFieldType };
