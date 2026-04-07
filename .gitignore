@@ -1,0 +1,12 @@
+# Example .gitignore file
+# Ignore node modules
+node_modules/
+
+# Ignore environment variables
+.env
+
+# Ignore all logs
+*.log
+
+# Except this specific log
+!important.log
