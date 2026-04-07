@@ -43,4 +43,4 @@ class Book {
     }
 }
 
-export { Book, bookChangableField, bookFieldType };
+export { Book, bookChangableField as bookChangeableField, bookFieldType };

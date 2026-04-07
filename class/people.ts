@@ -1,8 +1,8 @@
-import { BorrowLog } from "./borrowlog.ts";
-import { SystemLog } from "./systemlog.ts";
+import { BorrowLog } from "./borrowLog.ts";
+import { SystemLog } from "./systemLog.ts";
 import { calculateTotalTimeBetween, getDate } from "./utils.ts";
 
-type peopleChangableField = 
+type peopleChangeableField = 
     "name" |
     "DOB" |
     "gender" |
@@ -23,7 +23,7 @@ class People {
         this.citizenID = citizenID;
     }
 
-    changeInfoOnField(field: peopleChangableField, value: peopleFieldType) {
+    changeInfoOnField(field: peopleChangeableField, value: peopleFieldType) {
         if (field === "name" || field === "DOB" || field === "gender") {
             this[field] = value as string;
         }
@@ -71,7 +71,7 @@ class Member extends People {
         return false;
     }
 
-    overduePenaty(amount: number) {
+    overduePenalty(amount: number) {
         this.trustPoint -= (10 + amount * .1);
     }
 }

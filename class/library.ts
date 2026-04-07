@@ -1,11 +1,11 @@
 import { calculateTotalTimeBetween, getDate, getTime } from "./utils.ts";
 import { Member, Librarian } from "./people.ts";
-import { SystemLog } from "./systemlog.ts";
-import { BorrowLog } from "./borrowlog.ts";
-import { Book, bookChangableField, bookFieldType } from "./book.ts";
+import { SystemLog } from "./systemLog.ts";
+import { BorrowLog } from "./borrowLog.ts";
+import { Book, bookChangeableField, bookFieldType } from "./book.ts";
 
-const additionalInfomation = {
-    penatyRate: 0.1
+const additionalInformation = {
+    penaltyRate: 0.1
 }
 
 class Library {
@@ -27,7 +27,7 @@ class Library {
         });
     }
 
-    updateBookInfo(id: number, field: bookChangableField, value: number | string | string[]) {
+    updateBookInfo(id: number, field: bookChangeableField, value: number | string | string[]) {
         let book = this.books.get(id);
         if (book) {
             book.changeBookInfo(field, value);
@@ -44,7 +44,7 @@ class Library {
         return false;
     }
 
-    searchBookByCriteria(field: bookChangableField, value: bookFieldType) {
+    searchBookByCriteria(field: bookChangeableField, value: bookFieldType) {
         let bookArray = Array.from(this.books.values());
         let resultArray = [];
         for (let i = 0; i < this.books.size; i++) {
@@ -98,7 +98,7 @@ class Library {
         if (this.inShiftLibrarianID !== null && book && member && borrowLog) {
             book.availableCopy += 1;
             if (borrowLog.Status === "overdue"){
-                member.overduePenaty(book.price)
+                member.overduePenalty(book.price)
             }
             borrowLog.updateStatus("returned", getDate());
             member.removePendingBorrowLog(borrowLogID);
