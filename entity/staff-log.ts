@@ -1,18 +1,20 @@
 import { getDate, getTime } from "./utils.ts";
 
-class StaffLog {
+export class StaffLog {
     static instanceCount = 0;
     id: number;
+    staffID: number;
     date: string;
     time: string;
-    description: string;
+    type: 'START' | 'END';
+    note?: string;
 
-    constructor(description: string) {
+    constructor(staffID: number, type: 'START' | 'END', note?: string) {
         this.id = StaffLog.instanceCount++;
+        this.staffID = staffID;
         this.date = getDate();
         this.time = getTime();
-        this.description = description;
+        this.type = type;
+        this.note = note;
     }
 }
-
-export { StaffLog };

@@ -1,6 +1,9 @@
-import { ArchiveSpace } from "./archiveSpace.ts";
+import { ArchiveSpace } from "./archive-space.ts";
 import { Cloth } from "./cloth.ts";
+import { Receipt } from "./receipt.ts";
+import { StaffLog } from "./staff-log.ts";
 import { Staff } from "./staff.ts";
+import { TransactionLog } from "./transaction-log.ts";
 
 export type ShopInformationType = {
     name: string;
@@ -8,12 +11,13 @@ export type ShopInformationType = {
     location: string;
 };
 
-class Shop {
-    readonly ownerID: number;
+export class Shop {
+    private ownerID: number;
     information: ShopInformationType;
-
     cloths = new Map<string, Cloth>();
     staffs = new Map<number, Staff>();
+    transactionLog = new Map<number, TransactionLog>();
+    staffLog = new Map<number, StaffLog>();
     archiveSpace = new ArchiveSpace();
 
     constructor(ownerID: number, information: ShopInformationType) {
@@ -21,13 +25,17 @@ class Shop {
         this.information = information;
     }
 
+    get _ownerID() {
+        return this.ownerID;
+    }
+
     // --- CLOTH MANAGEMENT ---
 
-    addCloth(cloth: Cloth): void {
+    addCloth(cloth: Cloth) {
         this.cloths.set(cloth.barcode, cloth);
     }
 
-    restockCloth(cloths: Cloth[]): void {
+    addCloths(cloths: Cloth[]) {
         cloths.forEach((cloth) => this.addCloth(cloth));
     }
 
@@ -40,19 +48,19 @@ class Shop {
         return false;
     }
 
-    searchClothBy(field: keyof Cloth, value: any): Cloth[] {
+    searchClothBy<T extends keyof Cloth>(field: T, value: Cloth[T]): Cloth[] {
         return Array.from(this.cloths.values()).filter(
             (cloth) => cloth[field] === value
         );
     }
 
-    countClothBy(field: keyof Cloth, value: any): number {
+    countClothBy<T extends keyof Cloth>(field: T, value: Cloth[T]): number {
         return this.searchClothBy(field, value).length;
     }
 
     // --- STAFF MANAGEMENT ---
 
-    addStaff(staff: Staff): void {
+    addStaff(staff: Staff) {
         this.staffs.set(staff.id, staff);
     }
 
@@ -60,17 +68,45 @@ class Shop {
         return this.staffs.delete(id);
     }
 
-    searchStaffBy(field: keyof Staff, value: any): Staff[] {
+    searchStaffBy<T extends keyof Staff>(field: T, value: Staff[T]): Staff[] {
         return Array.from(this.staffs.values()).filter(
             (staff) => staff[field] === value
         )
     }
 
-    // --- INTERNAL UTILITIES ---
+    // --- ARCHIVE MANAGEMENT ---
 
-    addToArchive(cloth: Cloth): void {
-        this.archiveSpace.addClothToArchive(cloth);
+    addToArchive(clothOrReceipt: Cloth | Receipt) {
+        if (clothOrReceipt instanceof Cloth) {
+            this.archiveSpace.addCloth(clothOrReceipt);
+        }
+        else {
+            this.archiveSpace.addReceipt(clothOrReceipt)
+        }
     }
-}
 
-export { Shop };
+    // --- LOGS MANAGEMENT ---
+
+    addToTransactionLog(log: TransactionLog) {
+        this.transactionLog.set(log.id, log);
+    }
+
+    addToStaffLog(log: StaffLog) {
+        this.staffLog.set(log.id, log);
+    }
+
+    clearTransactionLog() {
+        this.transactionLog.clear();
+    }
+
+    clearStaffLog() {
+        this.staffLog.clear();
+    }
+
+    searchTransactionBy<K extends keyof TransactionLog>(field: K, value: any): TransactionLog[] {
+        return Array.from(this.transactionLog.values()).filter((log) => log[field] === value)
+    }
+
+    // --- GET METHOD ---
+
+}

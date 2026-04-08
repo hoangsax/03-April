@@ -1,29 +1,25 @@
 import { Cloth } from "./cloth.ts";
 import { getDate, getTime } from "./utils.ts";
-import { Receipt } from "./receipt.ts";
 
-enum transactionType {
-    restock,
-    sell
-}
+export type TransactionType = "SELL" | "RESTOCK";
 
-class TransactionLog {
+export class TransactionLog {
     static instanceCount = 0;
     id: number;
     date: string;
     time: string;
-    type: transactionType;
+    type: TransactionType;
     cloths: Cloth[];
     totalPrice: number;
+    receiptID: number;
 
-    constructor(type: transactionType, items: Cloth[], totalPrice: number) {
+    constructor(type: TransactionType, items: Cloth[], totalPrice: number, receiptID: number) {
         this.id = TransactionLog.instanceCount++;
         this.date = getDate();
         this.time = getTime();
         this.type = type;
         this.cloths = items;
         this.totalPrice = totalPrice;
+        this.receiptID = receiptID;
     }
 }
-
-export { TransactionLog, transactionType };

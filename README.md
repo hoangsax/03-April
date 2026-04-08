@@ -27,7 +27,7 @@ The central controller managing inventory, staff, and logs.
 
 | Class | Attributes | Methods |
 | :--- | :--- | :--- |
-| **Shop** | `cloths`, `transactionLogs`, `archived`, `staffs`, `shopInformation`, `owner` | `searchClothBy()`, `countClothBy()`, `addCloth()`, `removeCloth()`, `restockCloth()`, `sellCloth()`, `addStaff()`, `searchStaffBy()` |
+| **Shop** | `cloths`, `transactionLogs`, `archived`, `staffs`, `shopInformation`, `owner` | `searchClothBy()`, `countClothBy()`, `addCloth()`, `removeCloth()`, `addCloths()`, `sellCloth()`, `addStaff()`, `searchStaffBy()` |
 | **ArchiveSpace** | `cloths`, `receipts` | — |
 
 ### 👥 Staff & Logging
@@ -35,7 +35,7 @@ Management of human resources and operational history.
 
 | Class | Attributes | Methods |
 | :--- | :--- | :--- |
-| **Staff** | `instanceCount` (static), `name`, `gender`, `citizenID`, `dayOfBirth`, `staffID`, `workingShift` | `calculateWorkingTime()` |
+| **Staff** | `instanceCount` (static), `name`, `gender`, `citizenID`, `dayOfBirth`, `staffID`, `workingShift` |
 | **StaffLog** | `id`, `date`, `time`, `description` | — |
 
 ---

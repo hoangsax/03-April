@@ -1,11 +1,11 @@
 class Cloth {
-    static instanceCount = 0;
-    designName: string;
-    barcode: string;
-    color: string;
-    size: number;
-    material: string;
-    categories: string[];
+    static instanceCount = 0 ;
+    designName: string ;
+    barcode: string ;
+    color: string ;
+    size: number ;
+    material: string ;
+    categories: string[] ;
     basePrice: number;
 
     constructor(designName: string, barcode: string, color: string, size: number, material: string, categories: string[], price: number) {
