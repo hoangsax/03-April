@@ -16,12 +16,6 @@ class Staff {
         this.citizenID = citizenID;
         this.dayOfBirth = dayOfBirth;
     }
-
-    calculateWorkingTime() {
-
-    }
-
-    
 }
 
 export { Staff };

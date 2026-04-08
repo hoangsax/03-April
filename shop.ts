@@ -8,7 +8,7 @@ export type ShopInformationType = {
     location: string;
 };
 
-class Shop {
+class BaseShop {
     readonly ownerID: number;
     information: ShopInformationType;
 
@@ -40,8 +40,6 @@ class Shop {
         return false;
     }
 
-    // --- SEARCH & ANALYTICS ---
-
     searchClothBy(field: keyof Cloth, value: any): Cloth[] {
         return Array.from(this.cloths.values()).filter(
             (cloth) => cloth[field] === value
@@ -62,11 +60,21 @@ class Shop {
         return this.staffs.delete(id);
     }
 
+    searchStaffBy(field: keyof Staff, value: any): Staff[] {
+        return Array.from(this.staffs.values()).filter(
+            (staff) => staff[field] === value
+        )
+    }
+
     // --- INTERNAL UTILITIES ---
 
     addToArchive(cloth: Cloth): void {
         this.archiveSpace.addClothToArchive(cloth);
     }
+}
+
+class Shop extends BaseShop{
+    
 }
 
 export { Shop };

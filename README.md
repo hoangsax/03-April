@@ -1,72 +1,59 @@
-// Data Structure ideals for a cloth shop
-// Cloth:
-+ Barcode:
-    - static initialValue
+# Clothing Shop Management System - OOP System Analysis
 
-    + newBarcode(): string
+This documentation outlines the core Object-Oriented Programming (OOP) structures and data relationships for a retail clothing management system, focusing on inventory lifecycle and staff operations.
 
-+ Cloth:
-    - static instanceCount
-    - designName
-    - barcode
-    - color
-    - size
-    - material
+## Features
 
-+ Shop:
-    - cloths: Map< barcode, Cloth >
-    - transactionLogs: Map< date, TransactionLog[] >
-    - archived: ArchiveSpace;
-    - staffs: Staff[]
-    - shopInformation: { name, phone, location }
-    - owner: Staff
+- **Inventory Control:** Add, restock, and remove clothes with automated barcode generation.
+- **Transaction Tracking:** Log every sale and restock event with detailed transaction logs.
+- **Staff Management:** Track staff profiles, shifts.
+- **Archiving:** Move outdated or removed inventory and historical receipts to a dedicated archive space to keep the active shop database optimized.
+- **Search & Analytics:** Filter clothing by attributes and count stock levels dynamically.
 
-    + searchClothBy(): Cloth[]
-    + countClothBy(): number
-    + addCloth()
-    + removeCloth() // Move the cloth instance to archived database
-    + restockCloth()
-    + sellCloth()
+---
 
-    + addStaff()
-    + searchStaffBy(): Staff
+## Class Structures
 
-+ Staff:
-    - static instanceCount
-    - name
-    - gender
-    - citizenID
-    - dayOfBirth
-    - staffID
-    - workingShift: StaffLog[]
+### 👕 Clothing & Inventory
+Core entities for defining products and their unique identifiers.
 
-    + calculateWorkingTime(): number
+| Class | Attributes | Methods |
+| :--- | :--- | :--- |
+| **Barcode** | `initialValue` (static) | `newBarcode()` |
+| **Cloth** | `instanceCount` (static), `designName`, `barcode`, `color`, `size`, `material` | — |
 
-+ Receipt:
-    - id
-    - cloths: Cloth[]
-    - estimatePayment
-    - totalPayment
-    - change
-    - discount
-    - date
-    - time
-    - staffID
+### 🏬 Shop Operations
+The central controller managing inventory, staff, and logs.
 
-+ TransactionLog:
-    - id
-    - date
-    - time
-    - type: 'SELL' | 'RESTOCK'
-    - items: Cloth[]
-    - totalPrice
+| Class | Attributes | Methods |
+| :--- | :--- | :--- |
+| **Shop** | `cloths`, `transactionLogs`, `archived`, `staffs`, `shopInformation`, `owner` | `searchClothBy()`, `countClothBy()`, `addCloth()`, `removeCloth()`, `restockCloth()`, `sellCloth()`, `addStaff()`, `searchStaffBy()` |
+| **ArchiveSpace** | `cloths`, `receipts` | — |
 
-+ StaffLog:
-    - id
-    - date
-    - time
-    - description
+### 👥 Staff & Logging
+Management of human resources and operational history.
 
-+ ArchiveSpace:
-    - cloths: Map < barcode, Cloth >
-    - receipts: Map < date, Receipt >
+| Class | Attributes | Methods |
+| :--- | :--- | :--- |
+| **Staff** | `instanceCount` (static), `name`, `gender`, `citizenID`, `dayOfBirth`, `staffID`, `workingShift` | `calculateWorkingTime()` |
+| **StaffLog** | `id`, `date`, `time`, `description` | — |
+
+---
+
+## Data Models
+
+### 🧾 Financial Records
+Structures for customer billing and internal tracking.
+
+#### 1. Receipt
+Detailed breakdown of a customer purchase.
+- `id`, `cloths` (List), `estimatePayment`, `totalPayment`, `change`, `discount`, `date`, `time`, `staffID`
+
+#### 2. TransactionLog
+System-level log for inventory movement.
+- `id`, `date`, `time`, `type` (`SELL` or `RESTOCK`), `items`, `totalPrice`
+
+---
+
+## System Workflow Note
+> When a cloth is removed via `removeCloth()`, it is not deleted from the system; instead, the instance is moved to the **ArchiveSpace** to maintain data integrity for historical reporting.

@@ -18,11 +18,6 @@ function calculateTotalTimeBetweenToSeconds(startTime: string, endTime: string):
     let start = startTime.split(":").reduce((acc, time) => acc * 60 + parseInt(time), 0);
     let end = endTime.split(":").reduce((acc, time) => acc * 60 + parseInt(time), 0);
     let timeDiffInSeconds = end - start;
-    // for (let i = 0; i < 3; i++) {
-    //     resultArr.push(Math.floor(timeDiffInSeconds / (60 ** (2 - i))));
-    //     timeDiffInSeconds %= 60 ** (2 - i);
-    // }
-    // return resultArr.map((t) => t.toString().padStart(2, '0')).join(":");
     return timeDiffInSeconds
 }
 

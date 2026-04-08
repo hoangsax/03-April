@@ -17,8 +17,6 @@ class Cloth {
         this.categories = categories;
         this.basePrice = price;
     }
-
-
 }
 
 export { Cloth };
