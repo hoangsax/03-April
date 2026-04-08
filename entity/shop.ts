@@ -8,7 +8,7 @@ export type ShopInformationType = {
     location: string;
 };
 
-class BaseShop {
+class Shop {
     readonly ownerID: number;
     information: ShopInformationType;
 
@@ -71,10 +71,6 @@ class BaseShop {
     addToArchive(cloth: Cloth): void {
         this.archiveSpace.addClothToArchive(cloth);
     }
-}
-
-class Shop extends BaseShop{
-    
 }
 
 export { Shop };
