@@ -7,12 +7,20 @@ import { TransactionLog } from "./transaction-log.ts";
 
 export type ShopInformationType = {
     name: string;
-    phone: string;
+    phone: string[];
     location: string;
 };
 
+export type OwnerInformation = {
+    name: string,
+    citizenID: string,
+    dayOfBirth: string,
+    phone: string,
+    gender: string
+}
+
 export class Shop {
-    private ownerID: number;
+    owner: OwnerInformation;
     information: ShopInformationType;
     cloths = new Map<string, Cloth>();
     staffs = new Map<number, Staff>();
@@ -20,16 +28,10 @@ export class Shop {
     staffLog = new Map<number, StaffLog>();
     archiveSpace = new ArchiveSpace();
 
-    constructor(ownerID: number, information: ShopInformationType) {
-        this.ownerID = ownerID;
+    constructor(owner: OwnerInformation, information: ShopInformationType) {
+        this.owner = owner;
         this.information = information;
     }
-
-    get _ownerID() {
-        return this.ownerID;
-    }
-
-    // --- CLOTH MANAGEMENT ---
 
     addCloth(cloth: Cloth) {
         this.cloths.set(cloth.barcode, cloth);
@@ -48,18 +50,6 @@ export class Shop {
         return false;
     }
 
-    searchClothBy<T extends keyof Cloth>(field: T, value: Cloth[T]): Cloth[] {
-        return Array.from(this.cloths.values()).filter(
-            (cloth) => cloth[field] === value
-        );
-    }
-
-    countClothBy<T extends keyof Cloth>(field: T, value: Cloth[T]): number {
-        return this.searchClothBy(field, value).length;
-    }
-
-    // --- STAFF MANAGEMENT ---
-
     addStaff(staff: Staff) {
         this.staffs.set(staff.id, staff);
     }
@@ -67,14 +57,6 @@ export class Shop {
     removeStaff(id: number): boolean {
         return this.staffs.delete(id);
     }
-
-    searchStaffBy<T extends keyof Staff>(field: T, value: Staff[T]): Staff[] {
-        return Array.from(this.staffs.values()).filter(
-            (staff) => staff[field] === value
-        )
-    }
-
-    // --- ARCHIVE MANAGEMENT ---
 
     addToArchive(clothOrReceipt: Cloth | Receipt) {
         if (clothOrReceipt instanceof Cloth) {
@@ -84,8 +66,6 @@ export class Shop {
             this.archiveSpace.addReceipt(clothOrReceipt)
         }
     }
-
-    // --- LOGS MANAGEMENT ---
 
     addToTransactionLog(log: TransactionLog) {
         this.transactionLog.set(log.id, log);
@@ -102,11 +82,5 @@ export class Shop {
     clearStaffLog() {
         this.staffLog.clear();
     }
-
-    searchTransactionBy<K extends keyof TransactionLog>(field: K, value: any): TransactionLog[] {
-        return Array.from(this.transactionLog.values()).filter((log) => log[field] === value)
-    }
-
-    // --- GET METHOD ---
 
 }
