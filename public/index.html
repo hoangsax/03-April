@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Emporium Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-store me-2"></i><span id="shop-name">Fashion Emporium</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#cloth-management"><i class="fas fa-tshirt me-1"></i> Cloths</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#shopping-cart"><i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-danger ms-1" id="cartCountBadge">0 items</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statistics"><i class="fas fa-chart-line me-1"></i> Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#archive-space"><i class="fas fa-archive me-1"></i> Archive</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#transaction-log"><i class="fas fa-history me-1"></i> Transactions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="alert-container"></div>
+
+    <div class="container mt-4">
+        <!-- Shop Info Banner -->
+        <div class="card text-center mb-4 bg-light">
+            <div class="card-body">
+                <h5 class="card-title" id="shop-info-detail">Loading shop info...</h5>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <section id="statistics" class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-chart-bar me-2"></i>Statistics & Overview</h2>
+            <div class="row" id="statsContainer">
+                <!-- Stats cards will be loaded here by app.js -->
+            </div>
+        </section>
+
+        <!-- Cloth Management Section -->
+        <section id="cloth-management" class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-tshirt me-2"></i>Cloth Management</h2>
+
+            <!-- Add New Cloth Form -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    Add New Cloth
+                </div>
+                <div class="card-body">
+                    <form id="addClothForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="designName" class="form-label">Design Name</label>
+                                <input type="text" class="form-control" id="designName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="barcode" class="form-label">Barcode</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="barcode" readonly required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="generateBarcode()">Generate</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="basePrice" class="form-label">Price ($)</label>
+                                <input type="number" step="0.01" class="form-control" id="basePrice" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="size" class="form-label">Size</label>
+                                <input type="text" class="form-control" id="size">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color" class="form-label">Color</label>
+                                <input type="text" class="form-control" id="color">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="material" class="form-label">Material</label>
+                                <input type="text" class="form-control" id="material">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="categories" class="form-label">Categories (comma-separated)</label>
+                                <input type="text" class="form-control" id="categories">
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle me-1"></i> Add Cloth</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    Search & Filter
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="searchField" class="form-label">Search By</label>
+                            <select id="searchField" class="form-select">
+                                <option value="">All</option>
+                                <option value="name">Design Name</option>
+                                <option value="barcode">Barcode</option>
+                                <option value="color">Color</option>
+                                <option value="size">Size</option>
+                                <option value="material">Material</option>
+                                <option value="category">Category</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="searchValue" class="form-label">Search Value</label>
+                            <div id="searchValueContainer">
+                                <input type="text" class="form-control" id="searchValue" placeholder="Select a field to search">
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button class="btn btn-info w-100" onclick="searchCloths()"><i class="fas fa-search me-1"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Cloths Table -->
+            <div class="card">
+                <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                    All Cloths <span class="badge bg-light text-dark" id="clothCountBadge">0 items</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Design Name</th>
+                                    <th>Barcode</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
+                                    <th>Material</th>
+                                    <th>Price</th>
+                                    <th>Categories</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clothsTableBody">
+                                <!-- Cloths will be loaded here by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Cart Section -->
+        <section id="shopping-cart" class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-shopping-cart me-2"></i>Shopping Cart</h2>
+
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                    Your Cart <span class="badge bg-light text-dark" id="cartCountBadge">0 items</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive mb-3">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Design Name</th>
+                                    <th>Barcode</th>
+                                    <th>Price</th>
+                                    <th>Color</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartTableBody">
+                                <!-- Cart items will be loaded here by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label for="discount" class="form-label">Discount (%)</label>
+                            <input type="number" class="form-control" id="discount" value="0" min="0" max="100">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="staffId" class="form-label">Staff ID</label>
+                            <input type="number" class="form-control" id="staffId" value="1" min="1">
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <p class="mb-1">Items: <span id="cartItemCount">0</span></p>
+                            <p class="mb-1">Subtotal: $<span id="cartSubtotal">0.00</span></p>
+                            <h4 class="mb-2">Total: $<span id="cartTotal">0.00</span></h4>
+                            <input type="hidden" id="totalPayment" value="0.00">
+                            <button class="btn btn-warning me-2" onclick="clearCart()"><i class="fas fa-trash-alt me-1"></i> Clear Cart</button>
+                            <button class="btn btn-success" onclick="completeCheckout()"><i class="fas fa-cash-register me-1"></i> Complete Purchase</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Archive Space Section -->
+        <section id="archive-space" class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-archive me-2"></i>Archived Cloths</h2>
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Archived Inventory
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Design Name</th>
+                                    <th>Barcode</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
+                                    <th>Material</th>
+                                    <th>Price</th>
+                                    <th>Archived At</th>
+                                    <th>Categories</th>
+                                </tr>
+                            </thead>
+                            <tbody id="archiveTableBody">
+                                <!-- Archived cloths will be loaded here by app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Archived Receipts Table -->
+        <section id="archive-receipts" class="mb-5">
+            <h2 class="mt-5 mb-4"><i class="fas fa-receipt me-2"></i>Archived Receipts</h2>
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Archived Receipts
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Receipt ID</th>
+                                    <th>Date</th>
+                                    <th>Item Count</th>
+                                    <th>Total Paid</th>
+                                    <th>Staff ID</th>
+                                    <th>Items</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receiptsTableBody">
+                                <!-- Receipts will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transaction Log Section -->
+        <section id="transaction-log" class="mb-5">
+            <h2 class="mb-4"><i class="fas fa-history me-2"></i>Transaction Log</h2>
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    All Transactions
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="transactionLogTable">
+                            <!-- Transaction log will be loaded here by app.js -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div> <!-- End of container -->
+
+    <!-- Receipt Items Modal -->
+    <div class="modal fade" id="receiptItemsModal" tabindex="-1" aria-labelledby="receiptItemsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="receiptItemsModalLabel">Items for Receipt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="receiptItemsModalBody">
+                    <!-- Item details will be loaded here by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

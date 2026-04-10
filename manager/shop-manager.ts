@@ -118,8 +118,6 @@ class ShopManager {
     }
   }
 
-  // --- LOGS MANAGEMENT ---
-
   addToTransactionLog(log: TransactionLog) {
     this.shop.transactionLog.set(log.id, log);
   }

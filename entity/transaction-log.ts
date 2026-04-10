@@ -13,12 +13,12 @@ export class TransactionLog {
     totalPrice: number;
     receiptID: number;
 
-    constructor(type: TransactionType, items: Cloth[], totalPrice: number, receiptID: number) {
+    constructor(type: TransactionType, cloths: Cloth[], totalPrice: number, receiptID: number) {
         this.id = TransactionLog.instanceCount++;
         this.date = getDate();
         this.time = getTime();
         this.type = type;
-        this.cloths = items;
+        this.cloths = cloths;
         this.totalPrice = totalPrice;
         this.receiptID = receiptID;
     }

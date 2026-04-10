@@ -1,0 +1,119 @@
+{
+  "cloths": [
+    {
+      "designName": "Athletic Joggers",
+      "barcode": "CLOTH-20240518-JOGR1",
+      "color": "Grey",
+      "size": "L",
+      "material": "Polyester Blend",
+      "categories": [
+        "Sports wear",
+        "Casual"
+      ],
+      "basePrice": 45,
+      "archivedAt": "2026-04-10T08:15:01.799Z"
+    },
+    {
+      "designName": "Graphic Print Hoodie",
+      "barcode": "CLOTH-20240518-HOOD1",
+      "color": "Black",
+      "size": "XL",
+      "material": "Fleece",
+      "categories": [
+        "Street wear",
+        "Winter"
+      ],
+      "basePrice": 75,
+      "archivedAt": "2026-04-10T08:15:01.799Z"
+    },
+    {
+      "designName": "Slim-Fit Chinos",
+      "barcode": "CLOTH-20240518-CHNO1",
+      "color": "Khaki",
+      "size": "M",
+      "material": "Cotton Twill",
+      "categories": [
+        "Casual",
+        "Smart Casual"
+      ],
+      "basePrice": 59.99,
+      "archivedAt": "2026-04-10T08:15:01.798Z"
+    },
+    {
+      "designName": "wtf",
+      "barcode": "CLOTH-20260410-XOMVX",
+      "color": "Blue",
+      "size": "L",
+      "material": "Cotton",
+      "categories": [
+        "Casual"
+      ],
+      "basePrice": 1,
+      "archivedAt": "2026-04-10T08:14:56.978Z"
+    },
+    {
+      "designName": "holishiet",
+      "barcode": "CLOTH-20260410-QPFO0",
+      "color": "Black",
+      "size": "M",
+      "material": "Silk",
+      "categories": [
+        "Work"
+      ],
+      "basePrice": 1,
+      "archivedAt": "2026-04-10T08:14:53.165Z"
+    },
+    {
+      "designName": "Floral Sundress",
+      "barcode": "CLOTH-20240518-DRES1",
+      "color": "Yellow",
+      "size": "S",
+      "material": "Rayon",
+      "categories": [
+        "Summer",
+        "Dress",
+        "Casual"
+      ],
+      "basePrice": 65.5,
+      "archivedAt": "2026-04-10T08:09:01.194Z"
+    },
+    {
+      "designName": "Leather Biker Jacket",
+      "barcode": "CLOTH-20240518-JCKT1",
+      "color": "Black",
+      "size": "M",
+      "material": "Leather",
+      "categories": [
+        "Outer wear",
+        "Edgy"
+      ],
+      "basePrice": 199.99,
+      "archivedAt": "2026-04-10T08:09:01.194Z"
+    }
+  ],
+  "receipts": [
+    {
+      "receiptID": 1775808901795,
+      "cloths": [
+        "CLOTH-20240518-CHNO1",
+        "CLOTH-20240518-HOOD1",
+        "CLOTH-20240518-JOGR1"
+      ],
+      "totalPayment": 179.99,
+      "discount": 0,
+      "staffID": 1,
+      "archivedAt": "2026-04-10T08:15:01.798Z"
+    },
+    {
+      "receiptID": 1775808541192,
+      "cloths": [
+        "CLOTH-20240518-JCKT1",
+        "CLOTH-20240518-DRES1"
+      ],
+      "totalPayment": 265.49,
+      "discount": 0,
+      "staffID": 1,
+      "archivedAt": "2026-04-10T08:09:01.194Z"
+    }
+  ]
+}

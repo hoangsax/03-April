@@ -1,0 +1,110 @@
+{
+  "shopInfo": {
+    "location": "Main Street, Downtown"
+  },
+  "owner": {
+    "phone": "555-999-1111"
+  },
+  "cloths": [
+    {
+      "designName": "Classic Polo",
+      "barcode": "CLOTH-20240518-POLO1",
+      "color": "Navy",
+      "size": "L",
+      "material": "Pique Cotton",
+      "categories": [
+        "Casual",
+        "Work"
+      ],
+      "basePrice": 49.99
+    },
+    {
+      "designName": "V-Neck Sweater",
+      "barcode": "CLOTH-20240518-SWTR1",
+      "color": "Burgundy",
+      "size": "L",
+      "material": "Merino Wool",
+      "categories": [
+        "Winter",
+        "Smart Casual"
+      ],
+      "basePrice": 89.99
+    },
+    {
+      "designName": "Denim Shorts",
+      "barcode": "CLOTH-20240518-SHRT1",
+      "color": "Light Blue",
+      "size": "S",
+      "material": "Denim",
+      "categories": [
+        "Summer",
+        "Casual"
+      ],
+      "basePrice": 39.99
+    },
+    {
+      "designName": "Oxford Button-Down",
+      "barcode": "CLOTH-20240518-OXFD1",
+      "color": "White",
+      "size": "M",
+      "material": "Oxford Cloth",
+      "categories": [
+        "Formal",
+        "Work",
+        "Smart Casual"
+      ],
+      "basePrice": 55
+    },
+    {
+      "designName": "Silk Camisole",
+      "barcode": "CLOTH-20240518-CAMI1",
+      "color": "Champagne",
+      "size": "S",
+      "material": "Silk",
+      "categories": [
+        "Elegant",
+        "Lingerie"
+      ],
+      "basePrice": 35
+    }
+  ],
+  "staffs": [
+    {
+      "name": "Alice Smith",
+      "gender": "Female",
+      "citizenID": "987654321",
+      "dayOfBirth": "1985-05-20",
+      "id": 1
+    }
+  ],
+  "transactionLog": [
+    {
+      "type": "SELL",
+      "barcode": [
+        "CLOTH-20240518-JCKT1",
+        "CLOTH-20240518-DRES1"
+      ],
+      "totalPrice": 265.49,
+      "receiptID": 1775808541192,
+      "staffID": 1,
+      "date": "2026-04-10",
+      "time": "15:09:01",
+      "id": 1
+    },
+    {
+      "type": "SELL",
+      "barcode": [
+        "CLOTH-20240518-CHNO1",
+        "CLOTH-20240518-HOOD1",
+        "CLOTH-20240518-JOGR1"
+      ],
+      "totalPrice": 179.99,
+      "receiptID": 1775808901795,
+      "staffID": 1,
+      "date": "2026-04-10",
+      "time": "15:15:01",
+      "id": 2
+    }
+  ],
+  "staffLog": []
+}

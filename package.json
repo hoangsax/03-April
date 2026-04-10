@@ -1,0 +1,25 @@
+{
+  "name": "fashion-emporium-web-ui",
+  "version": "1.0.0",
+  "description": "Web-based management system for Fashion Emporium shop",
+  "main": "web-server.js",
+  "scripts": {
+    "start": "node web-server.js",
+    "dev": "node web-server.js"
+  },
+  "keywords": [
+    "fashion",
+    "shop",
+    "management",
+    "inventory",
+    "web-ui"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

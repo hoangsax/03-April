@@ -16,7 +16,7 @@ export class Receipt {
     constructor(cloths: Cloth[], totalPayment: number, discount: number, staffID: number) {
         this.id = Receipt.instanceCount++;
         this.cloths = cloths;
-        this.estimateCost = cloths.reduce((curr, value) => curr + value.basePrice, 0) * (1 - discount);
+        this.estimateCost = cloths.reduce((sum, cloth) => sum + cloth.basePrice, 0);
         this.totalPayment = totalPayment;
         this.change = this.totalPayment - this.estimateCost;
         this.discount = discount;
